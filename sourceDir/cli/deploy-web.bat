@@ -1,0 +1,1 @@
+copy %~d0%~p0..\web\target\${artifactId}-web.war %JBOSS_HOME%\server\default\deploy\

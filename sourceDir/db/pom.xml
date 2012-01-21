@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.${groupName}</groupId>
+	<artifactId>${artifactId}-db</artifactId>
+	<packaging>jar</packaging>
+	<version>1.0</version>
+	<name>${artifactId}-db</name>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>c5-public-repository</id>
+			<url>http://mvn.carbonfive.com/public</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<profiles>
+		<profile>
+			<id>db</id>
+			<build>
+				<defaultGoal>db-migration:reset</defaultGoal>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<version>2.0</version>
+						<configuration>
+							<source>1.6</source>
+							<target>1.6</target>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>com.carbonfive.db-support</groupId>
+						<artifactId>db-migration-maven-plugin</artifactId>
+						<version>0.9.9-m5</version>
+						<configuration>
+							<url>jdbc:mysql://localhost/${artifactId}</url>
+							<username>root</username>
+							<password>password</password>
+							<migrationsPath>migrations</migrationsPath>
+						</configuration>
+						<dependencies>
+							<dependency>
+								<groupId>mysql</groupId>
+								<artifactId>mysql-connector-java</artifactId>
+								<version>5.1.10</version>
+							</dependency>
+						</dependencies>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+ </project>
